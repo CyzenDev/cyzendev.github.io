@@ -16,7 +16,7 @@
 &lt;h3 id=&quot;使用shell安装&quot;&gt;使用Shell安装&lt;/h3&gt;
 &lt;p&gt;提示以下错误&lt;/p&gt;
 
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# pm install /sdcard/STM手电筒1.5.apk&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;&lt;span class=&quot;c&quot;&gt;# pm install /sdcard/STM手电筒1.5.apk&lt;/span&gt;
 avc:  denied  &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;read&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;  &lt;span class=&quot;k&quot;&gt;for  &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;scontext&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;u:r:system_server:s0 tcontext-u:object_r:fuse:s0 &lt;span class=&quot;nv&quot;&gt;tclass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;file &lt;span class=&quot;nv&quot;&gt;permissive&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;0
 System server has no access to &lt;span class=&quot;nb&quot;&gt;read &lt;/span&gt;file context u:object_r:fuse:s0 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;from path /sdcard/STM手筒1.5.apk, context u:r:system_server:s0&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
 Error: Unable to open file: /sdcard/STM手电筒1.5.apk
@@ -26,8 +26,7 @@ Error: Can&lt;span class=&quot;s1&quot;&gt;'t open file: /sdcard/STM手电筒1.5
 Exception occurred while executing '&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;':
 java.lang.IllegalArgumentException: Error: Can'&lt;/span&gt;t open file: /sdcard/STM手电筒1.5.apk
         at com.android.server.pm.PackageManagerShellCommand.setParamsSize&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;PackageManagerShellCommand.java:519&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-        ...
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+        ...&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;看起来像是存储权限的问题，用模拟器安装会报错&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;error string&lt;/code&gt;，由此可判出是apk的问题&lt;br /&gt;
 后来一番排查发现是因为用了&lt;strong&gt;RES资源混淆&lt;/strong&gt;，平常都用这个来减小apk体积，结果突然安卓11却不能用了？&lt;/p&gt;
