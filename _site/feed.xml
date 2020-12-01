@@ -7,6 +7,39 @@
 		<atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>安卓11 RES资源混淆问题</title>
+				<description>&lt;p&gt;记录一下群里反馈的安卓11无法安装apk问题&lt;/p&gt;
+
+&lt;h3 id=&quot;首先直接安装apk&quot;&gt;首先直接安装apk&lt;/h3&gt;
+&lt;p&gt;提示解析软件包时出现问题&lt;/p&gt;
+
+&lt;h3 id=&quot;使用shell安装&quot;&gt;使用Shell安装&lt;/h3&gt;
+&lt;p&gt;提示以下错误&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# pm install /sdcard/STM手电筒1.5.apk&lt;/span&gt;
+avc:  denied  &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;read&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;  &lt;span class=&quot;k&quot;&gt;for  &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;scontext&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;u:r:system_server:s0 tcontext-u:object_r:fuse:s0 &lt;span class=&quot;nv&quot;&gt;tclass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;file &lt;span class=&quot;nv&quot;&gt;permissive&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;0
+System server has no access to &lt;span class=&quot;nb&quot;&gt;read &lt;/span&gt;file context u:object_r:fuse:s0 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;from path /sdcard/STM手筒1.5.apk, context u:r:system_server:s0&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+Error: Unable to open file: /sdcard/STM手电筒1.5.apk
+Consider using a file under /data/local/tmp/
+Error: Can&lt;span class=&quot;s1&quot;&gt;'t open file: /sdcard/STM手电筒1.5.apk
+
+Exception occurred while executing '&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;':
+java.lang.IllegalArgumentException: Error: Can'&lt;/span&gt;t open file: /sdcard/STM手电筒1.5.apk
+        at com.android.server.pm.PackageManagerShellCommand.setParamsSize&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;PackageManagerShellCommand.java:519&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+        ...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;看起来像是存储权限的问题，用模拟器安装会报错&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;error string&lt;/code&gt;，由此可判出是apk的问题&lt;br /&gt;
+后来一番排查发现是因为用了&lt;strong&gt;RES资源混淆&lt;/strong&gt;，平常都用这个来减小apk体积，结果突然安卓11却不能用了？&lt;/p&gt;
+
+&lt;p&gt;试了置于二级目录和多级目录，都无法安装，猜测是arsc文件解析算法改了&lt;/p&gt;
+</description>
+				<pubDate>Tue, 01 Dec 2020 00:00:00 +0800</pubDate>
+				<link>/%E5%AE%89%E5%8D%93/2020/12/01/test.html</link>
+				<guid isPermaLink="true">/%E5%AE%89%E5%8D%93/2020/12/01/test.html</guid>
+			</item>
+		
+			<item>
 				<title>Hello World!</title>
 				<description>&lt;p&gt;&lt;strong&gt;dbyll&lt;/strong&gt; is minimalist, stylish theme for jekyll. Supports gravatar, account links (github, twitter, e-mail, pinterest, résume file) and a bio.&lt;/p&gt;
 
@@ -16,57 +49,9 @@
 
 &lt;p&gt;&lt;a class=&quot;btn btn-default&quot; href=&quot;https://github.com/dbtek/dbyll&quot;&gt;Grab your copy now!&lt;/a&gt;&lt;/p&gt;
 </description>
-				<pubDate>Fri, 15 Nov 2013 00:00:00 +0800</pubDate>
-				<link>/general/setup/demo/2013/11/15/hello-world.html</link>
-				<guid isPermaLink="true">/general/setup/demo/2013/11/15/hello-world.html</guid>
-			</item>
-		
-			<item>
-				<title>Configuration</title>
-				<description>&lt;p&gt;In your config file change these settings&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span class=&quot;na&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;dbyll&lt;/span&gt;
-&lt;span class=&quot;na&quot;&gt;author&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;  
-  &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;yourname&lt;/span&gt;  
-  &lt;span class=&quot;na&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;youremail&lt;/span&gt;  
-  &lt;span class=&quot;na&quot;&gt;github&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;asd123&lt;/span&gt;  
-  &lt;span class=&quot;na&quot;&gt;twitter&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;asd123&lt;/span&gt;  
-  &lt;span class=&quot;na&quot;&gt;pinterest&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;asd123&lt;/span&gt;  
-  &lt;span class=&quot;na&quot;&gt;linkedin&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;asd123&lt;/span&gt;  
-  &lt;span class=&quot;na&quot;&gt;resume&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;asd123&lt;/span&gt;  
-  &lt;span class=&quot;na&quot;&gt;bio&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Your stylish,  minimalist theme!&lt;/span&gt;  
-  &lt;span class=&quot;na&quot;&gt;email_md5&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;md5ofemail&lt;/span&gt;  &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-</description>
-				<pubDate>Fri, 15 Nov 2013 00:00:00 +0800</pubDate>
-				<link>/general/setup/demo/2013/11/15/configuration.html</link>
-				<guid isPermaLink="true">/general/setup/demo/2013/11/15/configuration.html</guid>
-			</item>
-		
-			<item>
-				<title>Sample</title>
-				<description>&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
-
-&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;foo&lt;/span&gt;
-  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'foo'&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-</description>
-				<pubDate>Thu, 14 Nov 2013 00:00:00 +0800</pubDate>
-				<link>/general/demo/2013/11/14/sample.html</link>
-				<guid isPermaLink="true">/general/demo/2013/11/14/sample.html</guid>
-			</item>
-		
-			<item>
-				<title>Sample 2</title>
-				<description>&lt;p&gt;Lorem ipsum dolor sit amet,  consectetur adipisicing elit,  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,  sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
-
-&lt;p&gt;Lorem ipsum dolor sit amet,  consectetur adipisicing elit,  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,  sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
-</description>
-				<pubDate>Thu, 14 Nov 2013 00:00:00 +0800</pubDate>
-				<link>/general/demo/sample/2013/11/14/sample-2.html</link>
-				<guid isPermaLink="true">/general/demo/sample/2013/11/14/sample-2.html</guid>
+				<pubDate>Mon, 30 Nov 2020 00:00:00 +0800</pubDate>
+				<link>/general/setup/demo/2020/11/30/hello-world.html</link>
+				<guid isPermaLink="true">/general/setup/demo/2020/11/30/hello-world.html</guid>
 			</item>
 		
 	</channel>

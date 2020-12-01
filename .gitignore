@@ -1,3 +1,6 @@
 *Thumbs.db
 Gemfile.lock
 .jekyll-cache/*
+start.bat
+.vscode/*
+_site/*
