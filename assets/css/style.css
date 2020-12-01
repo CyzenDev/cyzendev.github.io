@@ -4,6 +4,11 @@ body{
 	color: #22313F;
 }
 
+.nav-avatar {
+    float: left;
+	padding: 7px 15px;
+}
+
 .sidebar {
 	position: fixed;
 	top: 0px;
@@ -37,7 +42,7 @@ a.nav-link i{
 a.nav-link:hover { color: #777; }
 
 #bio {
-	font-family: sans-serif, Courier, monospace;
+	font-family: sans-serif, system-ui, monospace;
 	font-size: 11px;
 	margin: 0 auto;
 	margin-bottom: 10px;
@@ -104,7 +109,7 @@ article{
 .post-date {
 	text-transform: uppercase;
 	font-size: 14px;
-	letter-spacing: 3px;
+	letter-spacing: 2px;
 }
 
 article {
